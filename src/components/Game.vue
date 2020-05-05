@@ -32,8 +32,9 @@
 
     <b-modal
       :active.sync="showEndScreen"
-      width="500px">
-      <div class="box-gameover">
+      :can-cancel=false
+      width="440px">
+      <div class="box-gameover" @click="showEndScreen=false">
         <p class="image">
             <img src="../assets/images/game_over.svg">
         </p>
@@ -76,8 +77,12 @@ export default {
       'animals',
       'colors',
       'startGame',
-      'score'
-    ])
+      'score',
+      'speed'
+    ]),
+    gameSpeed: function () {
+      return this.speed ? 1 : 1.5
+    }
   },
   methods: {
     ...mapActions('game',
@@ -88,7 +93,8 @@ export default {
       'resetAnimals',
       'updateAnimal',
       'setScore',
-      'setStartGame'
+      'setStartGame',
+      'setSpeed'
     ]),
     resetAll() {
       this.resetAnimals()
@@ -174,14 +180,14 @@ export default {
 
       // new colors if condition is right
       if (this.timer_color==0 ||
-        (now - this.timer_color) > 200) {
+        (now - this.timer_color) > (200*this.gameSpeed)) {
         this.resetGenerateColors()
         this.timer_color=now
       }
 
       // add animal if condition right
       if ((this.timer_last == 0 ||
-        (now - this.timer_last) > 200) &&
+        (now - this.timer_last) > (200*this.gameSpeed)) &&
         (this.tracker.length < this.numTiles-2)) {
         let rnd = Math.floor(Math.random() * 2)
         rnd==0 ? this.addAnimal('B') : this.addAnimal('G')
@@ -193,7 +199,7 @@ export default {
       }
 
       //remove animal if condition right
-      if ((now - this.timer_first) > 1200) {
+      if ((now - this.timer_first) > (1200*this.gameSpeed)) {
         this.removeAnimal()
         // update timers
         this.timer_first = 0
@@ -207,6 +213,9 @@ export default {
     }
     if (localStorage.getItem('sizeTiles')) {
       this.setSizeTiles(JSON.parse(localStorage.getItem('sizeTiles')))
+    }
+    if (localStorage.getItem('speed')) {
+      this.setSpeed(JSON.parse(localStorage.getItem('speed')))
     }
     this.resetAll()
   },

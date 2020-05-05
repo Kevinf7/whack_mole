@@ -3,6 +3,7 @@ var Please = require("pleasejs")
 const state = {
   numTiles: 16,
   sizeTiles: 100,
+  speed: true,
 
   colors: [], // color map for each tile
   animals: [], // animal map for each tile 'B', 'G' or 'X'
@@ -32,7 +33,10 @@ const mutations = {
   },
   setScore(state, value) {
     state.score = value
-  }
+  },
+  setSpeed(state, value) {
+    state.speed = value
+  },
 }
 
 const actions = {
@@ -70,6 +74,10 @@ const actions = {
   },
   setScore({commit}, value) {
     commit('setScore', value)
+  },
+  setSpeed({commit}, value) {
+    commit('setSpeed', value)
+    localStorage.setItem('speed', JSON.stringify(value))
   }
 }
 

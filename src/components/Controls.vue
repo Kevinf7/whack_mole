@@ -19,11 +19,41 @@
         custom-class="has-text-secondary"
         v-else>
         <b-select :placeholder="numTiles.toString()">
-
         </b-select>
       </b-field>
     </div>
-    <div class="column is-8">
+    <div class="column is-2">
+      <b-field label="Speed" custom-class="has-text-secondary">
+        <b-switch
+          :rounded=false
+          size="is-small"
+          type="is-secondary"
+          v-model="speedSelect"
+          v-if="!startGame">
+          <span class="
+            is-size-6
+            has-text-secondary
+            has-text-weight-semibold">
+            Slow/Fast
+          </span>
+        </b-switch>
+        <b-switch
+          :rounded=false
+          size="is-small"
+          type="is-secondary"
+          v-model="speedSelect"
+          disabled
+          v-else>
+          <span class="
+            is-size-6
+            has-text-secondary
+            has-text-weight-semibold">
+            Slow/Fast
+          </span>
+        </b-switch>
+      </b-field>
+    </div>
+    <div class="column is-6">
       <b-field label="Size" custom-class="has-text-secondary">
           <b-slider
             v-model="sizeTilesSelect"
@@ -57,7 +87,13 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Controls',
   computed: {
-    ...mapState('game',['numTiles','sizeTiles','startGame']),
+    ...mapState('game',
+    [
+      'numTiles',
+      'sizeTiles',
+      'startGame',
+      'speed'
+    ]),
     numTilesSelect: {
       get() {
         return this.numTiles
@@ -73,14 +109,23 @@ export default {
       set(value) {
         this.setSizeTiles(value)
       }
-    }
+    },
+    speedSelect: {
+      get() {
+        return this.speed
+      },
+      set(value) {
+        this.setSpeed(value)
+      }
+    },
   },
   methods: {
     ...mapActions('game',
     [
       'setNumTiles',
       'setSizeTiles',
-      'setStartGame'
+      'setStartGame',
+      'setSpeed'
     ]),
     startGamePlay() {
       this.setStartGame(!this.startGame)
