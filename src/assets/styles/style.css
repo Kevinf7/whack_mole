@@ -1,0 +1,22 @@
+.site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.site-main {
+    flex: 1 0 auto;
+    background-color: #f4f4f4;
+}
+.footer {
+    color: #827397;
+}
+.footer a {
+    color: #827397;
+}
+.footer a:hover {
+    color: #827397;
+}
+.site-title {
+    font-family: 'Pacifico', cursive;
+    color: #d8b9c3;
+}
