@@ -1,4 +1,3 @@
-from app import routes
 from flask import Flask
 from config import Config
 from flask_cors import CORS
