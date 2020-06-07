@@ -10,3 +10,4 @@ app.config.from_object(Config)
 # CORS(app)
 
 # from app import api1, api2, api3 .. etc
+from . import routes
