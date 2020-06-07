@@ -12,22 +12,22 @@
         v-if="animals[i-1]=='B'"
         src="../assets/images/mole-svgrepo-com.svg"
         class="image-animal"
-        @click="animalClicked(i-1)">
+        @mousedown.prevent="animalClicked(i-1)">
       <img
         v-if="animals[i-1]=='G'"
         src="../assets/images/rabbit-svgrepo-com.svg"
         class="image-animal"
-        @click="animalClicked(i-1)">
+        @mousedown.prevent="animalClicked(i-1)">
       <img
         v-if="animals[i-1]=='H'"
         src="../assets/images/explosion-svgrepo-com.svg"
         class="image-boom"
-        @click="animalClicked(i-1)">
+        @mousedownl.prevent="animalClicked(i-1)">
       <img
         v-if="animals[i-1]=='S'"
         src="../assets/images/error-svgrepo-com.svg"
         class="image-boom"
-        @click="animalClicked(i-1)">
+        @mousedown.prevent="animalClicked(i-1)">
     </div>
 
     <b-modal
